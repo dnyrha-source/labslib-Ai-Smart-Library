@@ -1,0 +1,48 @@
+:root {
+  /* Color Palette - Clean Light Theme */
+  --bg-primary: hsl(210, 20%, 98%);
+  --bg-secondary: hsl(0, 0%, 100%);
+  --bg-surface: hsla(0, 0%, 100%, 0.85);
+  --bg-surface-hover: hsla(0, 0%, 100%, 1);
+  
+  /* Accent Colors (Labschool Blue & Vibrant Accents) */
+  --color-cyan: hsl(212, 100%, 35%); /* Labschool Blue */
+  --color-cyan-dim: hsla(212, 100%, 35%, 0.12);
+  --color-cyan-glow: hsla(212, 100%, 35%, 0.25);
+  
+  --color-purple: hsl(270, 75%, 55%);
+  --color-purple-dim: hsla(270, 75%, 55%, 0.12);
+  --color-purple-glow: hsla(270, 75%, 55%, 0.25);
+
+  --color-emerald: hsl(150, 80%, 40%);
+  --color-emerald-dim: hsla(150, 80%, 40%, 0.12);
+  
+  --color-rose: hsl(345, 85%, 55%);
+  --color-rose-dim: hsla(345, 85%, 55%, 0.12);
+
+  /* Text Colors */
+  --text-primary: hsl(224, 50%, 15%);
+  --text-secondary: hsl(215, 20%, 40%);
+  --text-muted: hsl(215, 16%, 55%);
+
+  /* Border & Glass Styles */
+  --border-glass: hsla(0, 0%, 0%, 0.08);
+  --border-glass-glow: hsla(212, 100%, 35%, 0.25);
+  --glass-blur: blur(12px);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.06);
+  
+  /* Fonts */
+  --font-sans: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Fira Code', 'Courier New', Courier, monospace;
+
+  /* Border Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}

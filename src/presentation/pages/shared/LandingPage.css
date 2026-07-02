@@ -1,0 +1,244 @@
+.landing-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  position: relative;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 0 20px 0;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--color-cyan-glow) 0%, transparent 70%);
+  filter: blur(50px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.hero-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass-glow);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-cyan);
+  box-shadow: 0 0 10px var(--color-cyan-dim);
+}
+
+.badge-sparkle {
+  color: var(--color-cyan);
+}
+
+.hero-logo-wrapper {
+  margin-bottom: 8px;
+}
+
+.hero-logo {
+  height: 90px;
+  object-fit: contain;
+}
+
+.hero-title {
+  font-size: 3rem;
+  line-height: 1.15;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-library-name {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+/* Features Section */
+.features-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.section-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  position: relative;
+  text-align: center;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--color-cyan);
+  margin: 12px auto 0 auto;
+  border-radius: var(--radius-full);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.feature-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+}
+
+.feature-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.cyan-glow {
+  background: var(--color-cyan-dim);
+  border: 1px solid hsla(180, 100%, 48%, 0.3);
+  color: var(--color-cyan);
+}
+
+.purple-glow {
+  background: var(--color-purple-dim);
+  border: 1px solid hsla(270, 95%, 65%, 0.3);
+  color: var(--color-purple);
+}
+
+.emerald-glow {
+  background: var(--color-emerald-dim);
+  border: 1px solid hsla(150, 100%, 45%, 0.3);
+  color: var(--color-emerald);
+}
+
+.rose-glow {
+  background: var(--color-rose-dim);
+  border: 1px solid hsla(345, 95%, 55%, 0.3);
+  color: var(--color-rose);
+}
+
+/* Roles Section */
+.roles-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.role-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  transition: border-color var(--transition-normal);
+}
+
+.role-box:hover {
+  border-color: var(--border-glass-glow);
+  cursor: pointer;
+}
+
+.role-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.role-box h4 {
+  font-size: 1.15rem;
+}
+
+.role-box p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .roles-grid {
+    grid-template-columns: 1fr;
+  }
+}

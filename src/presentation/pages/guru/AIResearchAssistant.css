@@ -1,0 +1,143 @@
+.research-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.research-form-card {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.research-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.research-input-group label {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.research-input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.research-input:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+.research-button {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--purple), #c084fc);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.research-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+}
+
+.research-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.research-result-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  animation: slideUp 0.5s ease-out;
+}
+
+@media (max-width: 992px) {
+  .research-result-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.markdown-report {
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.markdown-report h1, .markdown-report h2, .markdown-report h3 {
+  color: var(--text-primary);
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.markdown-report h1 {
+  font-size: 1.8rem;
+  background: linear-gradient(to right, var(--text-primary), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.markdown-report p {
+  margin-bottom: 16px;
+}
+
+.markdown-report ul, .markdown-report ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+
+.markdown-report li {
+  margin-bottom: 8px;
+}
+
+.markdown-report strong {
+  color: var(--purple-light);
+}
+
+.recommendation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  gap: 16px;
+  color: var(--text-secondary);
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,106 @@
+.guru-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Welcome Banner overrides */
+.banner-purple {
+  background: linear-gradient(135deg, var(--bg-surface) 0%, hsla(270, 95%, 65%, 0.05) 100%) !important;
+  border-color: hsla(270, 95%, 65%, 0.15) !important;
+}
+
+.welcome-badge.badge-purple {
+  background: var(--color-purple-dim);
+  border: 1px solid hsla(270, 95%, 65%, 0.25);
+  color: var(--color-purple);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+}
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.card-header-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-header-icon h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.tool-cta {
+  margin-top: 12px;
+}
+
+.quick-search-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* History */
+.list-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.list-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.list-panel-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.empty-list-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  gap: 16px;
+  min-height: 180px;
+}
+
+.empty-list-placeholder p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+.text-purple { color: var(--color-purple); }
+.text-cyan { color: var(--color-cyan); }
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

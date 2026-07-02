@@ -1,0 +1,172 @@
+.siswa-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Welcome Banner */
+.welcome-banner {
+  padding: 40px;
+  background: linear-gradient(135deg, var(--bg-surface) 0%, hsla(180, 100%, 48%, 0.05) 100%);
+  border-color: hsla(180, 100%, 48%, 0.15);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-cyan-dim);
+  border: 1px solid hsla(180, 100%, 48%, 0.25);
+  color: var(--color-cyan);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.welcome-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.welcome-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+}
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-header-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-header-icon h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.quick-search-box {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin-top: 8px;
+}
+
+.quick-search-input {
+  margin-bottom: 0 !important;
+  flex: 1;
+}
+
+.ai-rec-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  border: 1px dashed var(--border-glass);
+  border-radius: var(--radius-md);
+  text-align: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.01);
+  flex: 1;
+}
+
+.placeholder-sparkle {
+  color: var(--color-purple);
+}
+
+.ai-rec-placeholder p {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  max-width: 240px;
+}
+
+/* Lists section */
+.lists-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.list-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.list-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.list-panel-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.empty-list-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  gap: 16px;
+  min-height: 180px;
+}
+
+.empty-list-placeholder p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+/* Colors text overrides */
+.text-cyan { color: var(--color-cyan); }
+.text-purple { color: var(--color-purple); }
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .lists-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .welcome-title {
+    font-size: 1.8rem;
+  }
+}
