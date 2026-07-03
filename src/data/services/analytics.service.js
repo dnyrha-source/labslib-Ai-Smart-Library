@@ -51,7 +51,7 @@ export const analyticsService = {
         const topicHits = { 'Sains & Alam': 0, 'Fiksi & Sastra': 0, 'Sejarah': 0, 'Teknologi': 0, 'Lainnya': 0 };
         
         logsSnapshot.forEach(doc => {
-          const data = doc.data();
+          const data = doc.data({ serverTimestamps: 'estimate' });
           if (data.timestamp) {
             const dateStr = data.timestamp.toDate().toDateString();
             if (dayCounts[dateStr]) {
