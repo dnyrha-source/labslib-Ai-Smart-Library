@@ -207,6 +207,7 @@ INSTRUKSI SANGAT PENTING:
   },
 
   sendMessageToChat: async (chatSession, message, booksCatalog = []) => {
+    loggerService.logAIInteraction('chat', message, 'groq');
     const groq = getClient();
     const isFirstMessage = chatSession.history.length === 0;
     if (isFirstMessage) {
