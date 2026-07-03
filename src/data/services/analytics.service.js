@@ -105,7 +105,7 @@ export const analyticsService = {
 
   getPopularSearchTopics: async () => {
     try {
-      const logsQuery = query(collection(db, 'ai_logs'), where('action', '==', 'search_book'), orderBy('timestamp', 'desc'), limit(100));
+      const logsQuery = query(collection(db, 'ai_logs'), where('actionType', '==', 'search_book'), orderBy('timestamp', 'desc'), limit(100));
       const logsSnapshot = await getDocs(logsQuery);
       
       const stopWords = ['saya', 'aku', 'mencari', 'cari', 'buku', 'tentang', 'yang', 'dan', 'di', 'ke', 'dari', 'ini', 'itu', 'untuk', 'dengan', 'ada', 'apakah', 'ingin', 'mengetahui', 'tolong', 'carikan', 'informasi', 'apa', 'saja', 'yg', 'membahas', 'mengenai', 'berkaitan', 'berisi', 'menjelaskan', 'adalah', 'yaitu', 'merupakan', 'seputar', 'hal', 'dalam', 'pada', 'bagi', 'oleh', 'sebuah', 'suatu', 'beberapa', 'macam', 'jenis', 'seperti', 'serta', 'atau', 'tetapi', 'namun', 'karena', 'sebab', 'sehingga', 'maka', 'jadi', 'buat', 'bikin', 'kasih', 'beri', 'tahu', 'lihat', 'bagaimana', 'siapa', 'kapan', 'dimana', 'kenapa', 'mengapa', 'karya', 'tulis', 'penelitian', 'skripsi', 'makalah', 'jurnal', 'artikel'];
