@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/slims-proxy/:path*",
+      "destination": "http://perpus.labschool-unj.sch.id/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

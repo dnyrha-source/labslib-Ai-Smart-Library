@@ -5,6 +5,15 @@ import './PdfViewerModal.css';
 const PdfViewerModal = ({ isOpen, onClose, document }) => {
   if (!isOpen || !document) return null;
 
+  // Gunakan proxy Vercel untuk mem-bypass Mixed Content (HTTP di dalam HTTPS)
+  const getSecureUrl = (url) => {
+    if (!url) return '';
+    if (url.startsWith('http://perpus.labschool-unj.sch.id')) {
+      return url.replace('http://perpus.labschool-unj.sch.id', '/slims-proxy');
+    }
+    return url;
+  };
+
   return (
     <div className="pdf-modal-overlay">
       <div className="pdf-modal-container">
@@ -24,7 +33,7 @@ const PdfViewerModal = ({ isOpen, onClose, document }) => {
           {document.pdf_url ? (
             <div className="pdf-iframe-container">
               <iframe 
-                src={`${document.pdf_url}#toolbar=0&navpanes=0&scrollbar=0`}
+                src={`${getSecureUrl(document.pdf_url)}#toolbar=0&navpanes=0&scrollbar=0`}
                 className="pdf-iframe"
                 title={document.title}
               />
