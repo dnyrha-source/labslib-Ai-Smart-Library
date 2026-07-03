@@ -173,8 +173,8 @@ const LibrarianDashboard = () => {
                 <div className="bar-track">
                   <div 
                     className="bar-fill bg-gradient-purple" 
-                    style={{ '--width-target': `${topic.percentage}%` }}
-                  />
+                    style={{ width: `${topic.percentage}%` }}
+                  ></div>
                 </div>
               </div>
             ))}
@@ -202,7 +202,7 @@ const LibrarianDashboard = () => {
                         <div className="vertical-bar-tooltip">{activity.value} Kueri</div>
                         <div 
                           className="vertical-bar-fill bg-gradient-emerald" 
-                          style={{ '--height-target': `${heightPercent}%` }}
+                          style={{ height: `${heightPercent}%` }}
                         />
                       </div>
                       <span className="vertical-bar-label">{activity.day}</span>
