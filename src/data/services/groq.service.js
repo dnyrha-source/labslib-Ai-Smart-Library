@@ -16,7 +16,7 @@ const getClient = () => {
 };
 
 // Model pengganti untuk pencarian cepat dan parsing JSON (sesuai rekomendasi Groq)
-const SEARCH_MODEL = 'gpt-oss-20b';
+const SEARCH_MODEL = 'openai/gpt-oss-20b';
 // Model Llama 3.3 (70B) memiliki daya nalar lebih tinggi untuk chatting dan riset
 const REASONING_MODEL = 'llama-3.3-70b-versatile';
 
