@@ -16,6 +16,11 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../core/firebase';
 import { MOCK_BOOKS } from '../mock/books.mock';
+import { algoliasearch } from 'algoliasearch';
+
+const algoliaClient = import.meta.env.VITE_ALGOLIA_APP_ID && import.meta.env.VITE_ALGOLIA_SEARCH_KEY
+  ? algoliasearch(import.meta.env.VITE_ALGOLIA_APP_ID, import.meta.env.VITE_ALGOLIA_SEARCH_KEY)
+  : null;
 
 const BOOKS_COLLECTION = 'books';
 
@@ -170,6 +175,30 @@ export const bookService = {
       return bookService.getAllBooks();
     }
 
+    if (algoliaClient) {
+      try {
+        const { results } = await algoliaClient.search({
+          requests: [
+            {
+              indexName: 'books',
+              query: keyword,
+              hitsPerPage: 20, // Batasi hasil agar cepat
+            },
+          ],
+        });
+        
+        if (results && results.length > 0 && results[0].hits) {
+           return results[0].hits.map(hit => ({
+             ...hit,
+             id: hit.objectID, // Algolia menyimpan id di objectID
+           }));
+        }
+      } catch (error) {
+        console.warn('Algolia search failed, falling back to local search', error);
+      }
+    }
+
+    // Fallback ke pencarian lokal (Firestore) jika Algolia tidak aktif atau gagal
     // Bersihkan karakter spesial (termasuk asterisk **) agar tidak membuat Regex crash
     const cleanQuery = keyword.toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
     const stopWords = ['saya', 'aku', 'mencari', 'cari', 'buku', 'tentang', 'yang', 'dan', 'di', 'ke', 'dari', 'ini', 'itu', 'untuk', 'dengan', 'ada', 'apakah', 'ingin', 'mengetahui', 'tolong', 'carikan', 'informasi', 'apa', 'saja', 'yg', 'membahas', 'mengenai', 'berkaitan', 'berisi', 'menjelaskan', 'adalah', 'yaitu', 'merupakan', 'seputar', 'hal', 'dalam', 'pada', 'bagi', 'oleh', 'sebuah', 'suatu', 'beberapa', 'macam', 'jenis', 'seperti', 'serta', 'atau', 'tetapi', 'namun', 'karena', 'sebab', 'sehingga', 'maka', 'jadi', 'buat', 'bikin', 'kasih', 'beri', 'tahu', 'lihat', 'bagaimana', 'siapa', 'kapan', 'dimana', 'kenapa', 'mengapa', 'karya', 'tulis', 'penelitian', 'skripsi', 'makalah', 'jurnal', 'artikel', 'tugas', 'dgn', 'tersebut', 'anda', 'kamu', 'dia', 'mereka', 'kita', 'kami', 'ringkas', 'ringkasan', 'rangkum', 'rangkuman', 'sinopsis', 'sinopsisnya', 'jelaskan', 'berikan', 'coba', 'bisa', 'bisakah', 'nomor', 'no'];
