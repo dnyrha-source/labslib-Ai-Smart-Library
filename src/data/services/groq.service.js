@@ -209,11 +209,13 @@ INSTRUKSI SANGAT PENTING:
   sendMessageToChat: async (chatSession, message, booksCatalog = []) => {
     loggerService.logAIInteraction('chat', message, 'groq');
     const groq = getClient();
-    const isFirstMessage = chatSession.history.length === 0;
-    if (isFirstMessage) {
-      chatSession.history.push({
+    // Pastikan prompt sistem (persona) selalu ada di awal, terutama jika me-load dari localStorage
+    const systemPrompt = `Kamu adalah "LabsLib AI", asisten perpustakaan resmi di SMP & SMA Labschool Jakarta. Tugasmu membantu siswa menemukan buku, memberikan ringkasan, dan menjawab pertanyaan dengan ramah. ATURAN PENTING: Jika pengguna mencari buku, gunakan [INFO SISTEM] yang diberikan pada pesannya sebagai acuan koleksi. Jangan halusinasi buku yang tidak ada.`;
+    
+    if (chatSession.history.length === 0 || chatSession.history[0].role !== 'system') {
+      chatSession.history.unshift({
         role: 'system', 
-        content: `Kamu adalah "LabsLib AI", asisten perpustakaan resmi di SMP & SMA Labschool Jakarta. Tugasmu membantu siswa menemukan buku, memberikan ringkasan, dan menjawab pertanyaan dengan ramah. ATURAN PENTING: Jika pengguna mencari buku, gunakan [INFO SISTEM] yang diberikan pada pesannya sebagai acuan koleksi. Jangan halusinasi buku yang tidak ada.`
+        content: systemPrompt
       });
     }
 

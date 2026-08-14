@@ -175,14 +175,27 @@ export const bookService = {
       return bookService.getAllBooks();
     }
 
+    // Bersihkan karakter spesial dan hilangkan stop words agar Algolia lebih akurat
+    const cleanQuery = keyword.toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
+    const stopWords = ['saya', 'aku', 'mencari', 'cari', 'buku', 'tentang', 'yang', 'dan', 'di', 'ke', 'dari', 'ini', 'itu', 'untuk', 'dengan', 'ada', 'apakah', 'ingin', 'mengetahui', 'tolong', 'carikan', 'informasi', 'apa', 'saja', 'yg', 'membahas', 'mengenai', 'berkaitan', 'berisi', 'menjelaskan', 'adalah', 'yaitu', 'merupakan', 'seputar', 'hal', 'dalam', 'pada', 'bagi', 'oleh', 'sebuah', 'suatu', 'beberapa', 'macam', 'jenis', 'seperti', 'serta', 'atau', 'tetapi', 'namun', 'karena', 'sebab', 'sehingga', 'maka', 'jadi', 'buat', 'bikin', 'kasih', 'beri', 'tahu', 'lihat', 'bagaimana', 'siapa', 'kapan', 'dimana', 'kenapa', 'mengapa', 'karya', 'tulis', 'penelitian', 'skripsi', 'makalah', 'jurnal', 'artikel', 'tugas', 'dgn', 'tersebut', 'anda', 'kamu', 'dia', 'mereka', 'kita', 'kami', 'ringkas', 'ringkasan', 'rangkum', 'rangkuman', 'sinopsis', 'sinopsisnya', 'jelaskan', 'berikan', 'coba', 'bisa', 'bisakah', 'nomor', 'no'];
+    
+    // Split into keywords and remove stop words
+    let queryWords = cleanQuery.split(/\s+/).filter(w => w.length > 2 && !stopWords.includes(w));
+    
+    // If all words are stop words, fallback to the entire clean query
+    if (queryWords.length === 0) {
+      queryWords = [cleanQuery];
+    }
+    const optimizedQuery = queryWords.join(' ');
+
     if (algoliaClient) {
       try {
         const { results } = await algoliaClient.search({
           requests: [
             {
               indexName: 'books',
-              query: keyword,
-              hitsPerPage: 20, // Batasi hasil agar cepat
+              query: optimizedQuery, // Gunakan query yang sudah bersih dari kata hubung
+              hitsPerPage: 20,
             },
           ],
         });
@@ -199,18 +212,6 @@ export const bookService = {
     }
 
     // Fallback ke pencarian lokal (Firestore) jika Algolia tidak aktif atau gagal
-    // Bersihkan karakter spesial (termasuk asterisk **) agar tidak membuat Regex crash
-    const cleanQuery = keyword.toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
-    const stopWords = ['saya', 'aku', 'mencari', 'cari', 'buku', 'tentang', 'yang', 'dan', 'di', 'ke', 'dari', 'ini', 'itu', 'untuk', 'dengan', 'ada', 'apakah', 'ingin', 'mengetahui', 'tolong', 'carikan', 'informasi', 'apa', 'saja', 'yg', 'membahas', 'mengenai', 'berkaitan', 'berisi', 'menjelaskan', 'adalah', 'yaitu', 'merupakan', 'seputar', 'hal', 'dalam', 'pada', 'bagi', 'oleh', 'sebuah', 'suatu', 'beberapa', 'macam', 'jenis', 'seperti', 'serta', 'atau', 'tetapi', 'namun', 'karena', 'sebab', 'sehingga', 'maka', 'jadi', 'buat', 'bikin', 'kasih', 'beri', 'tahu', 'lihat', 'bagaimana', 'siapa', 'kapan', 'dimana', 'kenapa', 'mengapa', 'karya', 'tulis', 'penelitian', 'skripsi', 'makalah', 'jurnal', 'artikel', 'tugas', 'dgn', 'tersebut', 'anda', 'kamu', 'dia', 'mereka', 'kita', 'kami', 'ringkas', 'ringkasan', 'rangkum', 'rangkuman', 'sinopsis', 'sinopsisnya', 'jelaskan', 'berikan', 'coba', 'bisa', 'bisakah', 'nomor', 'no'];
-    
-    // Split into keywords and remove stop words
-    let queryWords = cleanQuery.split(/\s+/).filter(w => w.length > 2 && !stopWords.includes(w));
-    
-    // If all words are stop words, fallback to the entire clean query
-    if (queryWords.length === 0) {
-      queryWords = [cleanQuery];
-    }
-
     try {
       // Mengambil seluruh koleksi (sekitar 10.000 buku) agar pencarian menyeluruh.
       // Data akan di-cache selama 1 jam di memori (lihat getAllBooks).
