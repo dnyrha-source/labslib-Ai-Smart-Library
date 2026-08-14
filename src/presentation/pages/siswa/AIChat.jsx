@@ -126,10 +126,11 @@ const AIChat = () => {
       
       setMessages(prev => [...prev, newAiMsg]);
     } catch (error) {
+      console.error("DEBUG:", error);
       const errorMsg = {
         id: `msg-${Date.now()}-error`,
         sender: 'ai',
-        text: "Maaf, saya sedang mengalami gangguan koneksi. Mohon coba lagi sebentar.",
+        text: `Maaf, terjadi kesalahan: ${error.message || 'Gangguan koneksi'}.`,
         timestamp: new Date().toISOString()
       };
       setMessages(prev => [...prev, errorMsg]);
