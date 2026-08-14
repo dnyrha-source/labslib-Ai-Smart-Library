@@ -15,8 +15,8 @@ const getClient = () => {
   return groqClient;
 };
 
-// Model Llama 3.1 (8B) sangat cocok untuk parsing JSON dan pencarian cepat
-const SEARCH_MODEL = 'llama-3.1-8b-instant';
+// Model pengganti untuk pencarian cepat dan parsing JSON (sesuai rekomendasi Groq)
+const SEARCH_MODEL = 'gpt-oss-20b';
 // Model Llama 3.3 (70B) memiliki daya nalar lebih tinggi untuk chatting dan riset
 const REASONING_MODEL = 'llama-3.3-70b-versatile';
 
