@@ -225,7 +225,8 @@ INSTRUKSI SANGAT PENTING:
     if (booksCatalog && booksCatalog.length > 0) {
       const booksSummary = booksCatalog.map(b => {
         const desc = b.description ? b.description.substring(0, 300) + (b.description.length > 300 ? '...' : '') : 'Tidak ada sinopsis';
-        return `- Judul: ${b.title} | Penulis: ${b.author} | Subjek: ${b.subject ? b.subject.join(',') : '-'} | Sinopsis: ${desc}`;
+        const subjectStr = Array.isArray(b.subject) ? b.subject.join(', ') : (b.subject || '-');
+        return `- Judul: ${b.title} | Penulis: ${b.author} | Subjek: ${subjectStr} | Sinopsis: ${desc}`;
       }).join('\n');
       contextToInject = `\n\n[INFO SISTEM: Berikut adalah beberapa buku dari perpustakaan yang relevan dengan pertanyaanku beserta sinopsisnya:\n${booksSummary}\nMohon rekomendasikan atau rujuk buku-buku ini jika sesuai. Jika aku meminta ringkasan, berikan ringkasan berdasarkan sinopsis di atas.]`;
     }
