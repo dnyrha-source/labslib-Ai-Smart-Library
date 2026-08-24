@@ -17,8 +17,8 @@ const getClient = () => {
 
 // Model pengganti untuk pencarian cepat dan parsing JSON (sesuai rekomendasi Groq)
 const SEARCH_MODEL = 'openai/gpt-oss-20b';
-// Model Llama 3.3 (70B) memiliki daya nalar lebih tinggi untuk chatting dan riset
-const REASONING_MODEL = 'llama-3.3-70b-versatile';
+// Model Llama 3 dihapus aksesnya oleh Groq, diganti dengan GPT OSS 120B
+const REASONING_MODEL = 'openai/gpt-oss-120b';
 
 export const groqService = {
   searchBooksWithAI: async (userQuery, books) => {
