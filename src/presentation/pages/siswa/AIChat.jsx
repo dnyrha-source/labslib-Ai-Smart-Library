@@ -102,15 +102,14 @@ const AIChat = () => {
       const { bookService } = await import('../../../data/services/book.service');
       const relevantBooks = await bookService.searchBooks(userText);
       
-      // Ambil maksimal 8 buku baru, agar selalu tersisa ruang (minimal 7 buku) 
-      // untuk mempertahankan memori konteks buku sebelumnya.
-      const topRelevant = relevantBooks.slice(0, 8);
+      // Ambil maksimal 15 buku baru agar AI memiliki data yang lebih lengkap
+      const topRelevant = relevantBooks.slice(0, 15);
       
-      // Gabungkan buku relevan baru dengan buku konteks sebelumnya (Rolling Window 15 buku)
+      // Gabungkan buku relevan baru dengan buku konteks sebelumnya
       // Prioritaskan buku baru di depan, hapus duplikat
       const mergedBooks = [...topRelevant, ...contextBooks]
         .filter((v, i, a) => a.findIndex(t => t.biblio_id === v.biblio_id) === i)
-        .slice(0, 15);
+        .slice(0, 20); // Maksimal 20 buku tersimpan di memori konteks
         
       setContextBooks(mergedBooks);
       localStorage.setItem('labslib_chat_context', JSON.stringify(mergedBooks));

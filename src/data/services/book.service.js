@@ -196,6 +196,7 @@ export const bookService = {
               indexName: 'books',
               query: optimizedQuery, // Gunakan query yang sudah bersih dari kata hubung
               hitsPerPage: 20,
+              removeWordsIfNoResults: 'allOptional',
             },
           ],
         });
