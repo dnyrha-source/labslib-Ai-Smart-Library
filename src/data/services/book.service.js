@@ -177,14 +177,15 @@ export const bookService = {
 
     // Bersihkan karakter spesial dan hilangkan stop words agar Algolia lebih akurat
     const cleanQuery = keyword.toLowerCase().trim().replace(/[^a-z0-9\s]/g, '');
-    const stopWords = ['saya', 'aku', 'mencari', 'cari', 'buku', 'tentang', 'yang', 'dan', 'di', 'ke', 'dari', 'ini', 'itu', 'untuk', 'dengan', 'ada', 'apakah', 'ingin', 'mengetahui', 'tolong', 'carikan', 'informasi', 'apa', 'saja', 'yg', 'membahas', 'mengenai', 'berkaitan', 'berisi', 'menjelaskan', 'adalah', 'yaitu', 'merupakan', 'seputar', 'hal', 'dalam', 'pada', 'bagi', 'oleh', 'sebuah', 'suatu', 'beberapa', 'macam', 'jenis', 'seperti', 'serta', 'atau', 'tetapi', 'namun', 'karena', 'sebab', 'sehingga', 'maka', 'jadi', 'buat', 'bikin', 'kasih', 'beri', 'tahu', 'lihat', 'bagaimana', 'siapa', 'kapan', 'dimana', 'kenapa', 'mengapa', 'karya', 'tulis', 'penelitian', 'skripsi', 'makalah', 'jurnal', 'artikel', 'tugas', 'dgn', 'tersebut', 'anda', 'kamu', 'dia', 'mereka', 'kita', 'kami', 'ringkas', 'ringkasan', 'rangkum', 'rangkuman', 'sinopsis', 'sinopsisnya', 'jelaskan', 'berikan', 'coba', 'bisa', 'bisakah', 'nomor', 'no'];
+    const stopWords = ['saya', 'aku', 'mencari', 'cari', 'buku', 'tentang', 'yang', 'dan', 'di', 'ke', 'dari', 'ini', 'itu', 'untuk', 'dengan', 'ada', 'apakah', 'ingin', 'mengetahui', 'tolong', 'carikan', 'informasi', 'apa', 'saja', 'yg', 'membahas', 'mengenai', 'berkaitan', 'berisi', 'menjelaskan', 'adalah', 'yaitu', 'merupakan', 'seputar', 'hal', 'dalam', 'pada', 'bagi', 'oleh', 'sebuah', 'suatu', 'beberapa', 'macam', 'jenis', 'seperti', 'serta', 'atau', 'tetapi', 'namun', 'karena', 'sebab', 'sehingga', 'maka', 'jadi', 'buat', 'bikin', 'kasih', 'beri', 'tahu', 'lihat', 'bagaimana', 'siapa', 'kapan', 'dimana', 'kenapa', 'mengapa', 'karya', 'tulis', 'penelitian', 'skripsi', 'makalah', 'jurnal', 'artikel', 'tugas', 'dgn', 'tersebut', 'anda', 'kamu', 'dia', 'mereka', 'kita', 'kami', 'ringkas', 'ringkasan', 'rangkum', 'rangkuman', 'sinopsis', 'sinopsisnya', 'jelaskan', 'berikan', 'coba', 'bisa', 'bisakah', 'nomor', 'no', 'lain', 'lagi', 'dong', 'deh', 'sih', 'dongkrak'];
     
     // Split into keywords and remove stop words
     let queryWords = cleanQuery.split(/\s+/).filter(w => w.length > 2 && !stopWords.includes(w));
     
-    // If all words are stop words, fallback to the entire clean query
+    // If all words are stop words (e.g., "carikan yang lain"), do not perform a new search
+    // to preserve the previous context in the AI chat.
     if (queryWords.length === 0) {
-      queryWords = [cleanQuery];
+      return [];
     }
     const optimizedQuery = queryWords.join(' ');
 

@@ -25,7 +25,7 @@ export const groqService = {
     const groq = getClient();
     
     // PRE-FILTERING LOKAL (Pseudo-RAG) - Stop Words & Sistem Skor
-    const stopWords = ['saya', 'aku', 'mencari', 'cari', 'buku', 'tentang', 'yang', 'dan', 'di', 'ke', 'dari', 'ini', 'itu', 'untuk', 'dengan', 'ada', 'apakah', 'ingin', 'mengetahui', 'tolong', 'carikan', 'informasi', 'apa', 'saja', 'yg', 'membahas', 'mengenai', 'berkaitan', 'berisi', 'menjelaskan', 'adalah', 'yaitu', 'merupakan', 'seputar', 'hal', 'dalam', 'pada', 'bagi', 'oleh', 'sebuah', 'suatu', 'beberapa', 'macam', 'jenis', 'seperti', 'serta', 'atau', 'tetapi', 'namun', 'karena', 'sebab', 'sehingga', 'maka', 'jadi', 'buat', 'bikin', 'kasih', 'beri', 'tahu', 'lihat', 'bagaimana', 'siapa', 'kapan', 'dimana', 'kenapa', 'mengapa'];
+    const stopWords = ['saya', 'aku', 'mencari', 'cari', 'buku', 'tentang', 'yang', 'dan', 'di', 'ke', 'dari', 'ini', 'itu', 'untuk', 'dengan', 'ada', 'apakah', 'ingin', 'mengetahui', 'tolong', 'carikan', 'informasi', 'apa', 'saja', 'yg', 'membahas', 'mengenai', 'berkaitan', 'berisi', 'menjelaskan', 'adalah', 'yaitu', 'merupakan', 'seputar', 'hal', 'dalam', 'pada', 'bagi', 'oleh', 'sebuah', 'suatu', 'beberapa', 'macam', 'jenis', 'seperti', 'serta', 'atau', 'tetapi', 'namun', 'karena', 'sebab', 'sehingga', 'maka', 'jadi', 'buat', 'bikin', 'kasih', 'beri', 'tahu', 'lihat', 'bagaimana', 'siapa', 'kapan', 'dimana', 'kenapa', 'mengapa', 'lain', 'lagi', 'dong', 'sih', 'deh'];
     const cleanQuery = userQuery.toLowerCase().replace(/[.,?!()]/g, '');
     const queryWords = cleanQuery.split(/\s+/).filter(w => w.length > 2 && !stopWords.includes(w));
     
