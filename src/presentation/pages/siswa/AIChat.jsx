@@ -106,9 +106,12 @@ const AIChat = () => {
       const topRelevant = relevantBooks.slice(0, 15);
       
       // Gabungkan buku relevan baru dengan buku konteks sebelumnya
-      // Prioritaskan buku baru di depan, hapus duplikat
+      // Prioritaskan buku baru di depan, hapus duplikat berdasarkan ID unik
       const mergedBooks = [...topRelevant, ...contextBooks]
-        .filter((v, i, a) => a.findIndex(t => t.biblio_id === v.biblio_id) === i)
+        .filter((v, i, a) => {
+          const vId = v.id || v.biblio_id || v.objectID;
+          return a.findIndex(t => (t.id || t.biblio_id || t.objectID) === vId) === i;
+        })
         .slice(0, 20); // Maksimal 20 buku tersimpan di memori konteks
         
       setContextBooks(mergedBooks);
