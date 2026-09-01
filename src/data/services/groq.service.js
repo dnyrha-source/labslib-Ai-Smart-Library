@@ -223,8 +223,10 @@ INSTRUKSI SANGAT PENTING:
 
     let contextToInject = "";
     if (booksCatalog && booksCatalog.length > 0) {
-      const booksSummary = booksCatalog.map(b => {
-        const desc = b.description ? b.description.substring(0, 300) + (b.description.length > 300 ? '...' : '') : 'Tidak ada sinopsis';
+      // Potong jadi maksimal 10 buku agar tidak jebol token Groq (TPM 6000)
+      const safeBooks = booksCatalog.slice(0, 10);
+      const booksSummary = safeBooks.map(b => {
+        const desc = b.description ? b.description.substring(0, 200) + '...' : 'Tidak ada sinopsis';
         const subjectStr = Array.isArray(b.subject) ? b.subject.join(', ') : (b.subject || '-');
         return `- Judul: ${b.title} | Penulis: ${b.author} | Subjek: ${subjectStr} | Sinopsis: ${desc}`;
       }).join('\n');
@@ -232,7 +234,14 @@ INSTRUKSI SANGAT PENTING:
     }
 
     // Salin pesan untuk dikirim ke API agar INFO SISTEM tidak permanen di UI
-    const apiMessages = [...chatSession.history];
+    // Ambil maksimal 7 pesan terakhir agar riwayat obrolan panjang tidak membuat token jebol
+    const historyLength = chatSession.history.length;
+    let apiMessages = [...chatSession.history];
+    if (historyLength > 7) {
+       // Pastikan prompt sistem (index 0) tetap terbawa
+       apiMessages = [chatSession.history[0], ...chatSession.history.slice(historyLength - 6)];
+    }
+
     if (contextToInject) {
       apiMessages[apiMessages.length - 1] = { 
         role: 'user', 
